@@ -18,12 +18,22 @@ import org.jetbrains.compose.resources.painterResource
 
 import kmpmobilewebrequests.app.shared.generated.resources.Res
 import kmpmobilewebrequests.app.shared.generated.resources.compose_multiplatform
+import androidx.compose.runtime.LaunchedEffect
 
 @Composable
 @Preview
 fun App() {
+    var text by remember { mutableStateOf("Loading...") }
+    var showContent by remember { mutableStateOf(true) }
+
+    LaunchedEffect(true){
+        text = try{
+            Greeting().greet()
+        } catch (e: Exception){
+            "Error: ${e.message}"
+        }
+    }
     MaterialTheme {
-        var showContent by remember { mutableStateOf(false) }
         Column(
             modifier = Modifier
                 .background(MaterialTheme.colorScheme.primaryContainer)
@@ -35,13 +45,12 @@ fun App() {
                 Text("Click me!")
             }
             AnimatedVisibility(showContent) {
-                val greeting = remember { Greeting().greet() }
                 Column(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("Compose: $greeting")
+                    Text("Compose: $text")
                 }
             }
         }
