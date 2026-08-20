@@ -23,7 +23,7 @@ import androidx.compose.runtime.LaunchedEffect
 @Composable
 @Preview
 fun App() {
-    var text by remember { mutableStateOf("Loading...") }
+    var text by remember { mutableStateOf(sayHello("Gerardo")) }
     var showContent by remember { mutableStateOf(true) }
 
     LaunchedEffect(true){
