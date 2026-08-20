@@ -13,8 +13,19 @@ class ApplicationTest {
         application {
             module()
         }
-        val response = client.get("/")
+        val response = client.get("/raul1")
         assertEquals(HttpStatusCode.OK, response.status)
-        assertEquals("Hello, Ktor!", response.bodyAsText())
+        assertEquals("Hello, Raul!", response.bodyAsText())
+
+    }
+    @Test
+    fun testRaul2() = testApplication {
+        application {
+            module()
+        }
+        val response = client.get("/raul2")
+        assertEquals(HttpStatusCode.OK, response.status)
+        assertEquals("Hello, Raul2!", response.bodyAsText())
+
     }
 }

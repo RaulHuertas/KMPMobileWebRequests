@@ -14,9 +14,12 @@ fun main() {
 
 fun Application.module() {
     routing {
+        staticResources("/","staticContent")
         get("/raul1") {
             call.respondText(sayHello("Raul"))
         }
-        staticResources("/","staticContent")
+        get("/raul2") {
+            call.respondText(sayHello("Raul2"))
+        }
     }
 }
