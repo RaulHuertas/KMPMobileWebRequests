@@ -1,3 +1,5 @@
+import sun.jvmstat.monitor.MonitoredVmUtil.mainClass
+
 plugins {
     alias(libs.plugins.kotlinJvm)
     alias(libs.plugins.ktor)
@@ -14,6 +16,7 @@ dependencies {
     implementation(libs.logback)
     implementation(libs.ktor.serverCore)
     implementation(libs.ktor.serverNetty)
+    implementation("io.ktor:ktor-server-status-pages:${ktor}")
     testImplementation(libs.ktor.serverTestHost)
     testImplementation(libs.kotlin.testJunit)
 }

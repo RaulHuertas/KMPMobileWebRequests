@@ -4,6 +4,7 @@ import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.http.content.staticResources
 import io.ktor.server.netty.*
+import io.ktor.server.plugins.statuspages.StatusPages
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
@@ -14,12 +15,20 @@ fun main() {
 
 fun Application.module() {
     routing {
+        install(StatusPages) {
+            exception<IllegalStateException> { call, cause ->
+                call.respondText("App in illegal state as ${cause.message}")
+            }
+        }
         staticResources("/","staticContent")
         get("/raul1") {
             call.respondText(sayHello("Raul"))
         }
         get("/raul2") {
             call.respondText(sayHello("Raul2"))
+        }
+        get("/error-test") {
+            throw IllegalStateException("Too Busy")
         }
     }
 }
